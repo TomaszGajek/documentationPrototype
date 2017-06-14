@@ -22,8 +22,7 @@ var Docummentation = {
 	},
 
 	openDoc : function(){
-		console.log('open doc');
-		console.log(this.body);
+		this.nextButton.innerHTML = 'next';
 		this.body.classList.add('overlay');
 		this.documentation.classList.add('open');
 		document.querySelector('ul').children[0].style.display = 'block';
@@ -34,43 +33,52 @@ var Docummentation = {
 	toggleSlide : function(direction){
 		var elements = document.querySelectorAll('.hideable');
 		var visibleID = this.getVisible(elements);
-		console.log(elements);
 
 		elements[visibleID].style.display = 'none';
 		if(!direction){
-			var makeVisible = this.prev(visibleID, elements.length);
+			var makeVisible = this.prev(visibleID, elements);
 		} else {
-			var makeVisible = this.next(visibleID,elements.length);
+			var makeVisible = this.next(visibleID,elements);
 		}
 		elements[makeVisible].style.display = "block";
+
+
 
 	},
 	getVisible: function(elements){
 		var visibleID = -1;
 		for(var i=0;i<elements.length;i++){
 			if(elements[i].style.display=='block'){
-				visibleID = i;
+				visibleID = i;	
+				if(visibleID == elements.length-2) {
+					this.nextButton.innerHTML = 'Finish';
+				}
+
 			}
+
+
 		}
 
 		return visibleID;
 	},
 
-	prev: function(num,arrayLength){
+	prev: function(num,arr){
 		if(num == 0){
-			return arrayLength-1;
+			return arr.length-1;
 		} else {
 			return num-1;
 		}
 	},
-	next: function(num,arrayLength){
-		if(num == arrayLength-1) {
+	next: function(num,arr){
+
+		if(num == arr.length-1) {
 			this.documentation.classList.remove('open');
 			this.button.disabled = false;
-			return;
+			return 0;
+			
 		} else {
 			return num+1;
-		}	
+		}
 
 	}
 	
