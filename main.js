@@ -22,6 +22,7 @@ var Docummentation = {
 	},
 
 	openDoc : function(){
+		document.querySelector('.documentation-box').style.display = 'block';
 		this.nextButton.innerHTML = 'next';
 		this.body.classList.add('overlay');
 		this.documentation.classList.add('open');
@@ -56,7 +57,6 @@ var Docummentation = {
 
 			}
 
-
 		}
 
 		return visibleID;
@@ -74,6 +74,7 @@ var Docummentation = {
 		if(num == arr.length-1) {
 			this.documentation.classList.remove('open');
 			this.button.disabled = false;
+			document.querySelector('.documentation-box').style.display = 'none';
 			return 0;
 			
 		} else {
